@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model HoodID {
+  id String @id @default(uuid())
+  name String @unique
+  borough String
+  Crime Crime?
+  Rent Rent?
+  Income Income?
+}
+
+model Crime {
+  property_crime Decimal?
+  burglary_rate Decimal?
+  murder_rate Decimal? 
+  assault_rate Decimal? 
+  robbery_rate Decimal?
+  hood HoodID @relation(fields: [hoodid],references: [id])
+  hoodid String @unique
+}
+
+model Rent {
+  median_Rent Decimal? 
+  median_HousePrice Decimal? 
+  hood HoodID @relation(fields: [rentid],references: [id])
+  rentid String @unique
+}
+
+model Income {
+  median_income Decimal?
+  median_HouseHoldIncome Decimal? 
+  poverty_rate Decimal?
+  hood HoodID @relation(fields: [inid],references: [id])
+  inid String @unique
+}
+
+
+
