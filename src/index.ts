@@ -30,6 +30,6 @@ app.get('/hoodid/:id', async(req,res) => {
 
 
 
-app.listen(3000, () =>
+app.listen(PORT, () =>
   console.log('REST API server ready at: http://localhost:3000'),
 )
